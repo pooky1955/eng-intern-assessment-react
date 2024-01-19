@@ -1,7 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-export default function StopWatch() {
+interface StopwatchProps {
+    time : number;
+}
+
+export default function StopWatch(props : StopwatchProps) {
+    const {time} = props
+    const miliseconds = time % 1000;
+    const seconds = Math.floor((time / 1000) % 60);
+    const minutes = Math.floor((time / 1000 / 60) % 60);
+    const hours = Math.floor((time / 1000 / 60 / 60) % 24);
+    const formattedTime = [
+        hours.toString().padStart(2,"0"),
+        minutes.toString().padStart(2,"0"),
+        seconds.toString().padStart(2,"0"),
+        miliseconds.toString().padStart(3,"0")
+    ].join(":")
+
     return(
-        <div></div>
+        <div>
+            Time is {formattedTime}
+        </div>
     )
 }
